@@ -1,5 +1,7 @@
 package com.waylau.netty.demo.echo;
 
+import java.nio.charset.Charset;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -35,8 +37,8 @@ public class EchoServer {
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
                 	 ch.pipeline().addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
-                     ch.pipeline().addLast("decoder", new StringDecoder());
-                     ch.pipeline().addLast("encoder", new StringEncoder());
+                     ch.pipeline().addLast("decoder", new StringDecoder(Charset.forName("UTF-8")));
+                     ch.pipeline().addLast("encoder", new StringEncoder(Charset.forName("UTF-8")));
                      ch.pipeline().addLast(new EchoServerHandler());
                  }
              })

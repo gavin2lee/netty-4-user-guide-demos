@@ -1,5 +1,7 @@
 package com.waylau.netty.demo.echo;
 
+import java.nio.charset.Charset;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -40,8 +42,8 @@ public final class EchoClient {
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();
                 	 p.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
-                     p.addLast("decoder", new StringDecoder());
-                     p.addLast("encoder", new StringEncoder());
+                     p.addLast("decoder", new StringDecoder(Charset.forName("UTF-8")));
+                     p.addLast("encoder", new StringEncoder(Charset.forName("UTF-8")));
                      p.addLast(new EchoClientHandler());
                  }
              });
