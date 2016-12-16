@@ -1,5 +1,7 @@
 package com.waylau.netty.demo.echo;
 
+import java.io.UnsupportedEncodingException;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -21,7 +23,11 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) {
-		ctx.writeAndFlush(firstMessage);
+		try {
+			ctx.writeAndFlush(Unpooled.buffer(EchoClient.SIZE).writeBytes("AAAAAAAAAAA".getBytes("UTF-8")));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
