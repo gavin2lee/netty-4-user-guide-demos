@@ -32,6 +32,7 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) {
+		System.out.println("client");
 		ctx.flush();
 	}
 

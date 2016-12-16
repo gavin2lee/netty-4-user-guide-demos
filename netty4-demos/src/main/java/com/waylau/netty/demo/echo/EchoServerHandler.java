@@ -12,6 +12,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) { 
     	System.out.println(ctx.channel().remoteAddress()+"->Server :"+ msg.toString());
         ctx.writeAndFlush(msg); // (1)
+        ctx.channel().writeAndFlush("Msg from Server");
 //        ctx.flush(); // (2)
     }
 
